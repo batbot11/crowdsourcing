@@ -1,26 +1,32 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import AddFriendPopup from './components/popups/addFriendPopup/AddFriendPopup';
 
-function App() {
+const BlueButton = styled.button`
+background-color:  #3c8dbc;
+border: 1px solid  #3c8dbc;
+color: #fff;
+padding: 8px 12px;
+border-radius: 2px;
+font-size: 12px;
+cursor: pointer;
+margin-left: 50%;
+transform: translateX(-50%);
+margin-top: 60px;
+`;
+
+const App = () => {
+
+  const [openPopup, setOpenPopup] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <React.Fragment>
+
+    {openPopup && <AddFriendPopup/>}
+
+      <BlueButton onClick={() => setOpenPopup(true)} >Add a Friend</BlueButton>
+    </React.Fragment>
   );
-}
+};
 
 export default App;
