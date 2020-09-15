@@ -124,20 +124,48 @@ const GoldSpan = styled.span`
 const RecipientSection = styled.div`
   border-top: 3px solid rgba(196, 196, 196, 0.6);
   position: fixed;
-  bottom: 100px;
+  bottom: 67px;
   z-index: 11;
   background-color: #ffffff;
   width: 100%;
+  font-family: nunito-sans;
+  padding-bottom: 2vh;
 `;
 
 const RecipientClearText = styled.span`
   color: #e3b26a;
   font-size: 11px;
-  font-family: nunito-sans;
   position: absolute;
   right: 5%;
-  bottom: 6px;
+  bottom: 55px;
   cursor: pointer;
+`;
+
+const RecipientCarousel = styled.div`
+  display: flex;
+  overflow-x: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const RecipientItem = styled.div`
+  background: rgba(229, 229, 229, 0.6);
+  border-radius: 2px;
+  color: #636363;
+  font-size: 10px;
+  padding: 7px 11px;
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  margin-left: 5%;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const RecipientCloseIcon = styled.i`
+  margin-left: 5%;
 `;
 
 const AddFriendPopup = () => {
@@ -227,6 +255,14 @@ const AddFriendPopup = () => {
           <RecipientSection>
             <ListHeading>Recipient</ListHeading>
             <RecipientClearText>Clear All</RecipientClearText>
+            <RecipientCarousel>
+              {selectedUsers.map((selectedUser) => (
+                <RecipientItem>
+                  {selectedUser.name}
+                  <RecipientCloseIcon className="fas fa-times" />
+                </RecipientItem>
+              ))}
+            </RecipientCarousel>
           </RecipientSection>
         )}
 
