@@ -1,22 +1,31 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Container = styled.div`
   width: 90%;
   margin-left: 5%;
-  border: 1px solid #BDBDBD;
+  border: 1px solid #bdbdbd;
   border-radius: 10px;
-  height: 55px;
+  height: 35px;
+  display: flex;
+  align-items: center;
 `;
 
 const SearchIcon = styled.i`
-  color: #BDBDBD;
-  font-szie: 20px;
+  color: #bdbdbd;
+  font-sixe: 20px;
+  margin-left: 3%;
 `;
 
 const Input = styled.input`
-  
-`;
+  &::placeholder {
+    color: #BDBDBD;
+  };
+  height: 90%;
+  margin-left: 5%;
+  width: 80%;
+  border: none;
+}`;
 
 const SearchInput = () => {
   return (

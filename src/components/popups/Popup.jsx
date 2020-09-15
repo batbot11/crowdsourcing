@@ -11,9 +11,9 @@ export const Overlay = styled.div`
 `;
 
 export const PopupContainer = styled.div`
-  width: 30%;
+  width: 25%;
   background-color: #ffffff;
-  height: 560px;
+  height: 95vh; 
   position: fixed;
   left: 50%;
   top: 50%;
@@ -32,8 +32,8 @@ export const CloseIcon = styled.i`
 
 export const BackArrow = styled.i`
   position: absolute;
-  left: 68px;
-  top: 77px;
+  left: 5%;
+  top: 27px;
   font-size: 38px;
   color: #828282;
   cursor: pointer;
@@ -41,10 +41,13 @@ export const BackArrow = styled.i`
 `;
 
 export const Heading = styled.div`
-font-family: Poppins;
-font-style: normal;
-font-weight: bold;
-font-size: 20px;
-text-align: center;
-color: #636363;
+  font-family: Poppins;
+  font-style: normal;
+  font-weight: bold;
+  width: 50%;
+  margin-left: 25%;
+  font-size: 18px;
+  text-align: center;
+  color: #636363;
+  margin-top: 27px;
 `;

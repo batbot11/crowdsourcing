@@ -16,6 +16,7 @@ const Menu = styled.div`
   margin-left: 5%;
   border-bottom: 1px solid #e0e0e0;
   display: flex;
+  margin-bottom: 20px;
 `;
 
 const MenuItem = styled.div`
@@ -45,9 +46,20 @@ const ListHeading = styled.div`
   font-weight: bold;
   padding-left: 5%;
   margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
-const ListContainer = styled.div``;
+const ListContainer = styled.div`
+  height: 55%;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #f2f2f2;
+    border-radius: 10px;
+  }
+`;
 
 const ListItem = styled.div`
   position: relative;
@@ -56,26 +68,32 @@ const ListItem = styled.div`
   border-bottom: 1px solid rgba(196, 196, 196, 0.6);
   display: flex;
   &:hover {
-    background-color: #F2F2F2;
+    background-color: #f2f2f2;
   }
   padding-bottom: 20px;
+  padding-top: 10px;
 `;
 
 const UserImage = styled.img`
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   border-radius: 100%;
+  margin-left: 5%;
+  margin-right: 5%;
 `;
 
 const UserName = styled.div`
   font-weight: 900;
-  font-size: 16px;
+  font-size: 14px;
   color: #636363;
 `;
 
 const UserSub = styled.div`
-  font-size: 16px;
+  font-size: 11px;
   color: #636363;
+  display: flex;
+  align-items: center;
+  margin-top: 2px;
 `;
 
 const UserSeperator = styled.div`
@@ -84,10 +102,17 @@ const UserSeperator = styled.div`
   height: 5px;
   border-radius: 100%;
   display: inline-block;
+  margin-left: 3px;
+  margin-right: 3px;
+`;
+
+const GoldTextContainer = styled.div`
+  margin-top: 2px;
 `;
 
 const GoldSpan = styled.span`
   color: #e3b26a;
+  font-size: 14px;
 `;
 
 const AddFriendPopup = () => {
@@ -151,17 +176,16 @@ const AddFriendPopup = () => {
                 <UserSub>
                   Desainer {user.company} <UserSeperator />{" "}
                   {(user.tags || []).join(", ")}
-
-                  <div>
-                    <GoldSpan>
-                      <i className="fas fa-star" /> 4.9
-                    </GoldSpan>
-                    <GoldSpan>
-                      <i className="fas fa-trophy" /> 25
-                    </GoldSpan>
-                  </div>
-        
                 </UserSub>
+
+                <GoldTextContainer>
+                  <GoldSpan>
+                    <i className="fas fa-star" /> 4.9
+                  </GoldSpan>
+                  <GoldSpan>
+                    <i className="fas fa-trophy" /> 25
+                  </GoldSpan>
+                </GoldTextContainer>
               </div>
             </ListItem>
           ))}
