@@ -13,7 +13,7 @@ export const Overlay = styled.div`
 export const PopupContainer = styled.div`
   width: 25%;
   background-color: #ffffff;
-  height: 95vh; 
+  height: 95vh;
   position: fixed;
   left: 50%;
   top: 50%;
@@ -41,12 +41,12 @@ export const BackArrow = styled.i`
 `;
 
 export const Heading = styled.div`
-  font-family: Poppins;
+  font-family: poppins;
   font-style: normal;
   font-weight: bold;
-  width: 50%;
-  margin-left: 25%;
-  font-size: 18px;
+  width: 70%;
+  margin-left: 15%;
+  font-size: 16px;
   text-align: center;
   color: #636363;
   margin-top: 27px;

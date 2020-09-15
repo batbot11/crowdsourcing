@@ -25,6 +25,10 @@ const Input = styled.input`
   margin-left: 5%;
   width: 80%;
   border: none;
+  font-family: nunito-sans;
+  &:active, &:focus {
+    outline: none;
+  }
 }`;
 
 const SearchInput = () => {

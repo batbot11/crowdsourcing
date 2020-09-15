@@ -20,6 +20,8 @@ const Menu = styled.div`
 `;
 
 const MenuItem = styled.div`
+font-family: poppins;
+font-weight: bold;
   width: 50%;
   padding: 10px 10px;
   text-align: center;
@@ -47,6 +49,7 @@ const ListHeading = styled.div`
   padding-left: 5%;
   margin-top: 10px;
   margin-bottom: 10px;
+  font-family: nunito-sans;
 `;
 
 const ListContainer = styled.div`
@@ -72,6 +75,7 @@ const ListItem = styled.div`
   }
   padding-bottom: 20px;
   padding-top: 10px;
+  font-family: nunito-sans
 `;
 
 const UserImage = styled.img`
@@ -107,12 +111,13 @@ const UserSeperator = styled.div`
 `;
 
 const GoldTextContainer = styled.div`
-  margin-top: 2px;
+  margin-top: 5px;
 `;
 
 const GoldSpan = styled.span`
   color: #e3b26a;
   font-size: 14px;
+  margin-right: 10px;
 `;
 
 const AddFriendPopup = () => {
