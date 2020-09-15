@@ -6,6 +6,9 @@ export default {
   getUsers: async () => {
     try {
       const res = await axios.get(`${Base_URL}users`);
+      if (res.status === 200) {
+        return res.data;
+      }
     } catch (err) {
       console.log('error while fetching users', err);
     }
