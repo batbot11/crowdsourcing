@@ -20,8 +20,8 @@ const Menu = styled.div`
 `;
 
 const MenuItem = styled.div`
-font-family: poppins;
-font-weight: bold;
+  font-family: poppins;
+  font-weight: bold;
   width: 50%;
   padding: 10px 10px;
   text-align: center;
@@ -75,7 +75,8 @@ const ListItem = styled.div`
   }
   padding-bottom: 20px;
   padding-top: 10px;
-  font-family: nunito-sans
+  font-family: nunito-sans;
+  cursor: pointer;
 `;
 
 const UserImage = styled.img`
@@ -120,10 +121,31 @@ const GoldSpan = styled.span`
   margin-right: 10px;
 `;
 
+const RecipientSection = styled.div`
+  border-top: 3px solid rgba(196, 196, 196, 0.6);
+  position: fixed;
+  bottom: 100px;
+  z-index: 11;
+  background-color: #ffffff;
+  width: 100%;
+`;
+
+const RecipientClearText = styled.span`
+  color: #e3b26a;
+  font-size: 11px;
+  font-family: nunito-sans;
+  position: absolute;
+  right: 5%;
+  bottom: 6px;
+  cursor: pointer;
+`;
+
 const AddFriendPopup = () => {
   const [activeMenuItem, setActiveMenuItem] = useState("desainer");
 
   const [users, setUsers] = useState([]);
+
+  const [selectedUsers, setSelectedUsers] = useState([]);
 
   useEffect(() => {
     getUsersList();
@@ -136,6 +158,11 @@ const AddFriendPopup = () => {
     } catch (err) {
       console.log("error in component fetching users list");
     }
+  };
+
+  const addUser = (user) => {
+    const object = [...selectedUsers, user];
+    setSelectedUsers(object);
   };
 
   console.log("users", users);
@@ -172,7 +199,7 @@ const AddFriendPopup = () => {
 
         <ListContainer>
           {users.map((user) => (
-            <ListItem>
+            <ListItem onClick={() => addUser(user)}>
               <UserImage src={user.picture} />
 
               <div>
@@ -196,10 +223,17 @@ const AddFriendPopup = () => {
           ))}
         </ListContainer>
 
+        {selectedUsers.length > 0 && (
+          <RecipientSection>
+            <ListHeading>Recipient</ListHeading>
+            <RecipientClearText>Clear All</RecipientClearText>
+          </RecipientSection>
+        )}
+
         <LargeBlueButton>
           {" "}
-          <i className="fas fa-user-plus" />
-          Undang Bergabung (1)
+          <i style={{ marginRight: "5%" }} className="fas fa-user-plus" />
+          Undang Bergabung ({selectedUsers.length})
         </LargeBlueButton>
       </PopupContainer>
     </React.Fragment>
