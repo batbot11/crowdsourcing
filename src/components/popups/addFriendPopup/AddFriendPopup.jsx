@@ -168,6 +168,20 @@ const RecipientCloseIcon = styled.i`
   margin-left: 5%;
 `;
 
+const RecipientScroll = styled.div`
+  background-color: #83cdec;
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  color: #ffffff;
+  position: absolute;
+  right: 2%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+`;
+
 const AddFriendPopup = () => {
   const [activeMenuItem, setActiveMenuItem] = useState("desainer");
 
@@ -175,14 +189,27 @@ const AddFriendPopup = () => {
 
   const [selectedUsers, setSelectedUsers] = useState([]);
 
+  const [searchText, setSearchText] = useState("");
+
+  const [searchedUsers, setSearchedUsers] = useState([]);
+
   useEffect(() => {
     getUsersList();
   }, []);
 
-  const getUsersList = async () => {
+  // search after some time tuser has typed
+  useEffect(() => {
+    if (searchText.length > 0) {
+      console.log("inside effect of search text", searchText);
+      getUsersList({ q: searchText });
+    }
+  }, [searchText]);
+
+  const getUsersList = async (params) => {
     try {
-      const data = await api.getUsers();
-      setUsers(data);
+      const data = await api.getUsers(params);
+      if (!params) return setUsers(data);
+      else return setSearchedUsers(data);
     } catch (err) {
       console.log("error in component fetching users list");
     }
@@ -191,6 +218,22 @@ const AddFriendPopup = () => {
   const addUser = (user) => {
     const object = [...selectedUsers, user];
     setSelectedUsers(object);
+  };
+
+  const scrollRecipient = () => {
+    document
+      .getElementById("recipient_carousel")
+      .scrollBy({ top: 0, left: 200, behaviour: "smooth" });
+  };
+
+  let timeout = null;
+
+  const onSearchChange = (value) => {
+    const tempData = value;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      setSearchText(tempData);
+    }, 500);
   };
 
   console.log("users", users);
@@ -221,47 +264,79 @@ const AddFriendPopup = () => {
           </MenuItem>
         </Menu>
 
-        <SearchInput />
+        <SearchInput onChange={(value) => onSearchChange(value)} />
 
         <ListHeading>All Members</ListHeading>
 
         <ListContainer>
-          {users.map((user) => (
-            <ListItem onClick={() => addUser(user)}>
-              <UserImage src={user.picture} />
+          {searchText.length === 0 &&
+            users.map((user) => (
+              <ListItem onClick={() => addUser(user)}>
+                <UserImage src={user.picture} />
 
-              <div>
-                <UserName>{user.name}</UserName>
+                <div>
+                  <UserName>{user.name}</UserName>
 
-                <UserSub>
-                  Desainer {user.company} <UserSeperator />{" "}
-                  {(user.tags || []).join(", ")}
-                </UserSub>
+                  <UserSub>
+                    Desainer {user.company} <UserSeperator />{" "}
+                    {(user.tags || []).join(", ")}
+                  </UserSub>
 
-                <GoldTextContainer>
-                  <GoldSpan>
-                    <i className="fas fa-star" /> 4.9
-                  </GoldSpan>
-                  <GoldSpan>
-                    <i className="fas fa-trophy" /> 25
-                  </GoldSpan>
-                </GoldTextContainer>
-              </div>
-            </ListItem>
-          ))}
+                  <GoldTextContainer>
+                    <GoldSpan>
+                      <i className="fas fa-star" /> 4.9
+                    </GoldSpan>
+                    <GoldSpan>
+                      <i className="fas fa-trophy" /> 25
+                    </GoldSpan>
+                  </GoldTextContainer>
+                </div>
+              </ListItem>
+            ))}
+
+          {searchText.length > 0 &&
+            searchedUsers.map((user) => (
+              <ListItem onClick={() => addUser(user)}>
+                <UserImage src={user.picture} />
+
+                <div>
+                  <UserName>{user.name}</UserName>
+
+                  <UserSub>
+                    Desainer {user.company} <UserSeperator />{" "}
+                    {(user.tags || []).join(", ")}
+                  </UserSub>
+
+                  <GoldTextContainer>
+                    <GoldSpan>
+                      <i className="fas fa-star" /> 4.9
+                    </GoldSpan>
+                    <GoldSpan>
+                      <i className="fas fa-trophy" /> 25
+                    </GoldSpan>
+                  </GoldTextContainer>
+                </div>
+              </ListItem>
+            ))}
         </ListContainer>
 
         {selectedUsers.length > 0 && (
           <RecipientSection>
             <ListHeading>Recipient</ListHeading>
             <RecipientClearText>Clear All</RecipientClearText>
-            <RecipientCarousel>
+            <RecipientCarousel id="recipient_carousel">
               {selectedUsers.map((selectedUser) => (
                 <RecipientItem>
                   {selectedUser.name}
                   <RecipientCloseIcon className="fas fa-times" />
                 </RecipientItem>
               ))}
+
+              {selectedUsers.length >= 3 && (
+                <RecipientScroll onClick={() => scrollRecipient()}>
+                  <i className="fas fa-chevron-right" />
+                </RecipientScroll>
+              )}
             </RecipientCarousel>
           </RecipientSection>
         )}

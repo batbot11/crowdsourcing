@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 
 const Container = styled.div`
   width: 90%;
@@ -31,13 +32,17 @@ const Input = styled.input`
   }
 }`;
 
-const SearchInput = () => {
+const SearchInput = ({ onChange }) => {
   return (
     <Container>
       <SearchIcon className="fal fa-search" />
-      <Input placeholder="Cari Nama Peserta " />
+      <Input placeholder="Cari Nama Peserta" onChange={e => onChange(e.target.value)} />
     </Container>
   );
+};
+
+SearchInput.propTypes = {
+  onChange: PropTypes.func,
 };
 
 export default SearchInput;
